@@ -1,0 +1,1 @@
+In order to add this .vscode file, on Mac, it was Cmd + Shift + P, then Open Workspace Settings (JSON)
