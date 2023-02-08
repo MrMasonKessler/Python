@@ -16,7 +16,9 @@ def convert_distance():
     miles = int(kilometers*.621371)
     feet = int(miles)*5280
     inches = int(feet)*12
-    print(kilometers, "kilometers is", miles, "miles =", feet, "feet =", inches, "inches.")
+    #print(kilometers, "kilometers is", miles, "miles =", feet, "feet =", inches, "inches.")
+    #print("%d kilometers is %d miles, which is %d feet, which is %d inches." %(kilometers,miles,feet,inches))
+    print(f'{kilometers} kilometers is {miles} miles, which is {feet} feet, which is {inches} inches.')
 
 
 def main():
