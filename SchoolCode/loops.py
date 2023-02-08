@@ -81,6 +81,12 @@ def reverse_string():
         reversed = reversed + userIn[i]
     print(reversed)
 
+def split():
+    string = "ABC DE FGHI"
+    tokens = string.split(" ")
+    for token in tokens:
+        print(token)
+
 
 
 def main():
@@ -89,7 +95,8 @@ def main():
     #print_chars()
     #loop_control()
     #print_range()
-    reverse_string()
+    #reverse_string()
+    split()
 
 
 if __name__ == "__main__":
