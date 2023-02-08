@@ -45,6 +45,41 @@ def loop_control():
             sum += number
     print("Sum =", sum)
 
+def print_range():
+    seq = range(11) #0-10
+    print("\nFirst range: 0 - 10")
+    for element in seq:
+        print(element,end=" ")
+    print()
+
+    seq = range(0,21,2) #0-20, steps up by 2s
+    print("\nSecond range: 0 - 20, goes up by 2")
+    for element in seq:
+        print(element,end= " ")
+    print()
+
+    seq = range(5,16,2)
+    index = 0
+    print("\nThird range, shows how to use indexes instead of iteration")
+    while index < len(seq):
+        print(seq[index],end=" ")
+        index+=1
+    print()
+
+    seq = range(10,-1,-1)
+    index = 0
+    print("\nFourth range, shows that you can go backwards through iteration")
+    while index < len(seq):
+        print(seq[index], end=" ")
+        index+=1
+    print()
+
+def reverse_string():
+    userIn = str(input("Please enter a string you wish to reverse: "))
+    reversed = ""
+    for i in range(len(userIn)-1,-1,-1):
+        reversed = reversed + userIn[i]
+    print(reversed)
 
 
 
@@ -52,7 +87,9 @@ def main():
     #countdown(10)
     #count_up(10)
     #print_chars()
-    loop_control()
+    #loop_control()
+    #print_range()
+    reverse_string()
 
 
 if __name__ == "__main__":
