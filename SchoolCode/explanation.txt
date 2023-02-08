@@ -1,0 +1,1 @@
+In this folder, I will be putting all of the python code that I have learned from my classes at RIT.
