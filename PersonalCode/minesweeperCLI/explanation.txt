@@ -1,0 +1,4 @@
+In this folder, I will attempt to make a minesweeper game in the command line interface.
+
+I will be using b as a bomb, the standard numbers to indicate how many bombs are surrounding, and a
+user input of (x,y) to place a bomb, starting at (0,0)
