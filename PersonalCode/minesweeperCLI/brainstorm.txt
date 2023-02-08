@@ -1,0 +1,12 @@
+Figure out how to display the board in cli, probably using an array of 0 or -
+
+Make a copy of the board, where the layout of bombs and spaces will already be decided
+
+Make a random distribution of the bombs on the second board
+
+Figure out how many bombs are touching each square that isn't a bomb
+
+Make a choosing system so the player can select where they want to reveal
+
+Make it so the revealed square shows the right number / bomb
+    if there is a bomb shown, end the game and show the full board, saying they lose
