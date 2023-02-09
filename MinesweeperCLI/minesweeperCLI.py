@@ -71,6 +71,7 @@ def makeBombBoard(choice):
         if (x >= 0 and x <= size-2):
             if array[y][x+1] != 'X':
                 array[y][x+1] += 1
+    return array
 
 def seenBoard(choice):
     if choice == 1:
@@ -88,6 +89,12 @@ def showBoard(board):
         print(" ".join(str(cell) for cell in row))
         print("")
 
+def winCon(board):
+    for row in board:
+        for cell in row:
+            if cell == '-':
+                return False
+    return True
 
 def clear_term(): #This function is to clear the terminal every time the game is started.
     if os.name == 'posix':
@@ -97,15 +104,32 @@ def clear_term(): #This function is to clear the terminal every time the game is
 
 
 def minesweeper():
-    choice = boardChoice()
-    makeBombBoard(choice)
-    print()
-    print("Generating board . . .")
-    time.sleep(1.5)
-    print()
-    clear_term()
-    print("MINESWEEPER CLI GAME\n")
-    seenBoard(choice)
+    status = True
+    while status:
+        choice = boardChoice()
+        bombBoard = makeBombBoard(choice)
+        print()
+        print("Generating board . . .")
+        time.sleep(1.5)
+        print()
+        clear_term()
+        print("MINESWEEPER CLI GAME\n")
+        playerBoard = seenBoard(choice)
+        while True:
+            if winCon(playerBoard)==False:
+                print("Please pick which cell you wish to open")
+                x = int(input("X: "))
+                y = int(input("Y: "))
+                if bombBoard[y][x]=='X':
+                    print("You lose! Game over!")
+                    showBoard(bombBoard)
+                    break
+                else:
+                    playerBoard[y][x] = bombBoard[y][x]
+                    showBoard(playerBoard)
+        
+
+
 
 def main():
     minesweeper()
