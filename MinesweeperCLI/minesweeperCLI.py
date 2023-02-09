@@ -90,6 +90,8 @@ def showBoard(board):
         print("")
 
 def winCon(board):
+    #Check to see the number of moves made. Since I don't have a flag system yet, the number of moves in a win should be equal to size*size-bombs
+
     for row in board:
         for cell in row:
             if cell == '-':
@@ -102,11 +104,19 @@ def clear_term(): #This function is to clear the terminal every time the game is
     else:
         os.system('cls')
 
-
 def minesweeper():
-    status = True
-    while status:
+    #status = True
+    #while status:
         choice = boardChoice()
+        if choice == 1:
+            size = 5
+            bombs = 3
+        if choice == 2:
+            size = 7
+            bombs = 17
+        if choice == 3:
+            size = 10
+            bombs = 36
         bombBoard = makeBombBoard(choice)
         print()
         print("Generating board . . .")
@@ -115,8 +125,26 @@ def minesweeper():
         clear_term()
         print("MINESWEEPER CLI GAME\n")
         playerBoard = seenBoard(choice)
+        showBoard(playerBoard)
+        moves = 0
         while True:
-            if winCon(playerBoard)==False:
+            print("Please pick which cell you wish to open")
+            x = int(input("X: "))
+            y = int(input("Y: "))
+            if bombBoard[y][x]=='X':
+                print("You lose! Game over!")
+                showBoard(bombBoard)
+                break
+            else:
+                playerBoard[y][x] = bombBoard[y][x]
+                showBoard(playerBoard)
+                moves += 1
+            if moves == (size*size-bombs):
+                print("You win! Congratulations!")
+                showBoard(bombBoard)
+                break
+
+            '''if winCon(playerBoard)==False:
                 print("Please pick which cell you wish to open")
                 x = int(input("X: "))
                 y = int(input("Y: "))
@@ -126,14 +154,10 @@ def minesweeper():
                     break
                 else:
                     playerBoard[y][x] = bombBoard[y][x]
-                    showBoard(playerBoard)
-        
-
-
+                    showBoard(playerBoard)'''
 
 def main():
     minesweeper()
-
 
 if __name__ == "__main__":
     main()
