@@ -1,10 +1,10 @@
-Figure out how to display the board in cli, probably using an array of 0 or -
+Figure out how to display the board in cli, probably using an array of 0 or -           DONE
 
 Make a copy of the board, where the layout of bombs and spaces will already be decided
 
-Make a random distribution of the bombs on the second board
+Make a random distribution of the bombs on the second board                             DONE
 
-Figure out how many bombs are touching each square that isn't a bomb
+Figure out how many bombs are touching each square that isn't a bomb                    DONE
 
 Make a choosing system so the player can select where they want to reveal
 

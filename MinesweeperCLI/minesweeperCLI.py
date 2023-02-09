@@ -17,9 +17,13 @@ import time
 # 3
 # 4
 
-def minesweeper():
+def boardChoice():
     clear_term()
     choice = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
+    return choice
+
+
+def makeBombBoard(choice):
     if choice == 1:
         size = 5
         bombs = 3
@@ -29,12 +33,6 @@ def minesweeper():
     if choice == 3:
         size = 10
         bombs = 36
-    print()
-    print("Generating board . . .")
-    time.sleep(1.5)
-    print()
-    clear_term()
-    print("MINESWEEPER CLI GAME\n")
 
     array = [[0 for row in range(size)] for col in range(size)] #Makes the array used in generating the board
     for bomb in range(bombs):
@@ -74,8 +72,19 @@ def minesweeper():
             if array[y][x+1] != 'X':
                 array[y][x+1] += 1
 
+def seenBoard(choice):
+    if choice == 1:
+        size = 5
+    if choice == 2:
+        size = 7
+    if choice == 3:
+        size = 10
+    array = [['-' for row in range(size)] for col in range(size)]
+    return array
 
-    for row in array:
+
+def showBoard(board):
+    for row in board:
         print(" ".join(str(cell) for cell in row))
         print("")
 
@@ -86,6 +95,17 @@ def clear_term(): #This function is to clear the terminal every time the game is
     else:
         os.system('cls')
 
+
+def minesweeper():
+    choice = boardChoice()
+    makeBombBoard(choice)
+    print()
+    print("Generating board . . .")
+    time.sleep(1.5)
+    print()
+    clear_term()
+    print("MINESWEEPER CLI GAME\n")
+    seenBoard(choice)
 
 def main():
     minesweeper()
