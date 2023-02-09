@@ -9,4 +9,8 @@ Figure out how many bombs are touching each square that isn't a bomb            
 Make a choosing system so the player can select where they want to reveal               DONE
 
 Make it so the revealed square shows the right number / bomb                            DONE
-    if there is a bomb shown, end the game and show the full board, saying they lose
+    if there is a bomb shown, end the game and show the full board, saying they lose    DONE
+
+
+STILL NEED TO SOMEHOW ERROR CHECK AND LIMIT OPTIONS OF CHOICES
+ADDITIONALLY, IT SEEMS LIKE THE BOMB COUNTS AREN'T ALWAYS CORRECT, SO CHECK LOGIC

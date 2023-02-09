@@ -131,6 +131,8 @@ def minesweeper():
             print("Please pick which cell you wish to open")
             x = int(input("X: "))
             y = int(input("Y: "))
+            time.sleep(0.5)
+            clear_term()
             if bombBoard[y][x]=='X':
                 print("You lose! Game over!")
                 showBoard(bombBoard)
@@ -143,18 +145,6 @@ def minesweeper():
                 print("You win! Congratulations!")
                 showBoard(bombBoard)
                 break
-
-            '''if winCon(playerBoard)==False:
-                print("Please pick which cell you wish to open")
-                x = int(input("X: "))
-                y = int(input("Y: "))
-                if bombBoard[y][x]=='X':
-                    print("You lose! Game over!")
-                    showBoard(bombBoard)
-                    break
-                else:
-                    playerBoard[y][x] = bombBoard[y][x]
-                    showBoard(playerBoard)'''
 
 def main():
     minesweeper()
