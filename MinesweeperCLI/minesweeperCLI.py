@@ -22,10 +22,13 @@ def minesweeper():
     choice = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
     if choice == 1:
         size = 5
+        bombs = 3
     if choice == 2:
-        size = 10
+        size = 7
+        bombs = 17
     if choice == 3:
-        size = 15
+        size = 10
+        bombs = 36
     print()
     print("Generating board . . .")
     time.sleep(1.5)
@@ -34,41 +37,42 @@ def minesweeper():
     print("MINESWEEPER CLI GAME\n")
 
     array = [[0 for row in range(size)] for col in range(size)] #Makes the array used in generating the board
-    x = random.randint(0,size-1) #Picks an x variable in the board to be a bomb
-    y = random.randint(0,size-1) #Picks a y variable in the board to be a bomb
-    array[y][x] = 'X' #Sets that selected spot to be a bomb
+    for bomb in range(bombs):
+        x = random.randint(0,size-1) #Picks an x variable in the board to be a bomb
+        y = random.randint(0,size-1) #Picks a y variable in the board to be a bomb
+        array[y][x] = 'X' #Sets that selected spot to be a bomb
 
-    #This next section makes it so that the spaces around the bomb are filled to be a 1, showing there is 1 bomb touching that spot
+        #This next section makes it so that the spaces around the bomb are filled to be a 1, showing there is 1 bomb touching that spot
 
-    #Check bottom first:
-    if(y >= 0 and y <= size-2):
-        if array[y+1][x] != 'X':
-            array[y+1][x] += 1 # bottom center
-    if (x >=0 and x <= size-2) and (y >= 0 and y <= size-2):
-        if array[y+1][x+1] != 'X':
-            array[y+1][x+1] += 1 # bottom right
-    if (x >= 1 and x <= size-1) and (y >= 0 and y <= size-2):
-        if array[y+1][x-1] != 'X':
-            array[y+1][x-1] += 1 # bottom left
+        #Check bottom first:
+        if(y >= 0 and y <= size-2):
+            if array[y+1][x] != 'X':
+                array[y+1][x] += 1 # bottom center
+        if (x >=0 and x <= size-2) and (y >= 0 and y <= size-2):
+            if array[y+1][x+1] != 'X':
+                array[y+1][x+1] += 1 # bottom right
+        if (x >= 1 and x <= size-1) and (y >= 0 and y <= size-2):
+            if array[y+1][x-1] != 'X':
+                array[y+1][x-1] += 1 # bottom left
 
-    #Check top next:
-    if (x >= 0 and x <= size-1) and (y >= 1 and y <= size-1):
-        if array[y-1][x] != 'X':
-            array[y-1][x] += 1 # top center
-    if (x >= 0 and x <= size-2) and (y >= 1 and y <= size-1):
-        if array[y-1][x+1] != 'X':
-            array[y-1][x+1] += 1 # top right
-    if (x >= 1 and x <= size-1) and (y >= 1 and y <= size-1):
-        if array[y-1][x-1] != 'X':
-            array[y-1][x-1] += 1 # top left
+        #Check top next:
+        if (x >= 0 and x <= size-1) and (y >= 1 and y <= size-1):
+            if array[y-1][x] != 'X':
+                array[y-1][x] += 1 # top center
+        if (x >= 0 and x <= size-2) and (y >= 1 and y <= size-1):
+            if array[y-1][x+1] != 'X':
+                array[y-1][x+1] += 1 # top right
+        if (x >= 1 and x <= size-1) and (y >= 1 and y <= size-1):
+            if array[y-1][x-1] != 'X':
+                array[y-1][x-1] += 1 # top left
 
-    #Check sides:
-    if (x >= 1 and x <= size-1):
-        if array[y][x-1] != 'X':
-            array[y][x-1] += 1
-    if (x >= 0 and x <= size-2):
-        if array[y][x+1] != 'X':
-            array[y][x+1] += 1
+        #Check sides:
+        if (x >= 1 and x <= size-1):
+            if array[y][x-1] != 'X':
+                array[y][x-1] += 1
+        if (x >= 0 and x <= size-2):
+            if array[y][x+1] != 'X':
+                array[y][x+1] += 1
 
 
     for row in array:
