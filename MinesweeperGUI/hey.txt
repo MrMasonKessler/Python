@@ -1,1 +1,0 @@
-This is the folder where I will be implementing my own version of Minesweeper using the tkinter GUI.
