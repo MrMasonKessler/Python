@@ -4,6 +4,9 @@ import random
 
 root = Tk()
 root.title("Minesweeper GUI")
+WIDTH = 600
+HEIGHT = 600
+root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
 
 #click = True
@@ -12,6 +15,8 @@ count = 0
 
 #START BY HAVING MINESWEEPER WORK AS A 4X4 GRID
 
+
+sideLen = 4 #Length of a side in button, will automate later
 
 btn1 = StringVar()
 btn2 = StringVar()
@@ -34,52 +39,53 @@ btn16 = StringVar()
 
 def play():
     #I can probably make a button factory function, but I will do that after confirming that I can hard code it first.
+
     button1 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(1,0,0))
     button1.grid(row=0,column=0)
 
     button2 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn2,command=lambda:press(2,0,1))
     button2.grid(row=0,column=1)
 
-    button3 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(3,0,2))
+    button3 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn3,command=lambda:press(3,0,2))
     button3.grid(row=0,column=2)
 
-    button4 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(4,0,3))
+    button4 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn4,command=lambda:press(4,0,3))
     button4.grid(row=0,column=3)
 
-    button5 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(5,1,0))
+    button5 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn5,command=lambda:press(5,1,0))
     button5.grid(row=1,column=0)
 
-    button6 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(6,1,1))
+    button6 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn6,command=lambda:press(6,1,1))
     button6.grid(row=1,column=1)
 
-    button7 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(7,1,2))
+    button7 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn7,command=lambda:press(7,1,2))
     button7.grid(row=1,column=2)
 
-    button8 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(8,1,3))
+    button8 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn8,command=lambda:press(8,1,3))
     button8.grid(row=1,column=3)
 
-    button9 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(9,2,0))
+    button9 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn9,command=lambda:press(9,2,0))
     button9.grid(row=2,column=0)
 
-    button10 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(10,2,1))
+    button10 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn10,command=lambda:press(10,2,1))
     button10.grid(row=2,column=1)
 
-    button11 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(11,2,2))
+    button11 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn11,command=lambda:press(11,2,2))
     button11.grid(row=2,column=2)
 
-    button12 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(12,2,3))
+    button12 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn12,command=lambda:press(12,2,3))
     button12.grid(row=2,column=3)
 
-    button13 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(13,3,0))
+    button13 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn13,command=lambda:press(13,3,0))
     button13.grid(row=3,column=0)
 
-    button14 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(14,3,1))
+    button14 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn14,command=lambda:press(14,3,1))
     button14.grid(row=3,column=1)
 
-    button15 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(15,3,2))
+    button15 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn15,command=lambda:press(15,3,2))
     button15.grid(row=3,column=2)
 
-    button16 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(16,3,3))
+    button16 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn16,command=lambda:press(16,3,3))
     button16.grid(row=3,column=3)
 
 def makeBombBoard():
