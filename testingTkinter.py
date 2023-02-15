@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.ttk import *
 
 root = Tk()
+root.geometry(f'{700}x{300}')
 frame = ttk.Frame(root,padding=10)
 frame.grid()
 ttk.Label(frame,text="Hello, World!").grid(column=0,row=0)
