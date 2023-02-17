@@ -88,6 +88,9 @@ def play():
     button16 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn16,command=lambda:press(16,3,3))
     button16.grid(row=3,column=3)
 
+    bombBoard = makeBombBoard()
+    print(bombBoard)
+
 def makeBombBoard():
     size = 4
     bombs = 3
