@@ -20,6 +20,16 @@ def boardChoice():
     return choice
 
 
+def randomCell(board):
+    pass
+    size = len(board)
+    x = random.randint(0,size-1)
+    y = random.randint(0,size-1)
+    return (x,y)
+
+
+
+
 def makeBombBoard(choice):
     if choice == 1:
         size = 5
@@ -81,9 +91,6 @@ def makeBombBoard(choice):
         # if (x >= 0 and x <= size-2):
         #     if array[y][x+1] != 'X':
         #         array[y][x+1] += 1
-
-        
-
 
 
     return array
