@@ -1,3 +1,4 @@
+from curses.ascii import isdigit
 import random
 import os
 import time
@@ -118,14 +119,18 @@ def minesweeper():
     while True:
         print("Please pick which cell you wish to open")
         while True:
-            x = int(input("X: "))
-            if x >= size:
+            x = (input("X: "))
+            if x.isdigit() == False:
+                print("Invalid choice, please select an integer.")
+            elif int(x) >= size:
                 print("Invalid choice, please select somewhere on the board.")
             else:
                 break
         while True:
-            y = int(input("Y: "))
-            if y >= size:
+            y = (input("Y: "))
+            if y.isdigit() == False:
+                print("Invalid choice, please select an integer.")
+            elif int(y) >= size:
                 print("Invalid choice, please select somewhere on the board.")
             else:
                 break
@@ -154,6 +159,8 @@ def minesweeper():
 
 def main():
     minesweeper()
+    #x = 1.5
+    #print(x.is_integer())
 
 if __name__ == "__main__":
     main()
