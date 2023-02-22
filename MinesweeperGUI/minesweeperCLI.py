@@ -96,32 +96,33 @@ def clear_term(): #This function is to clear the terminal every time the game is
         os.system('cls')
 
 def minesweeper():
-    #status = True
-    #while status:
-        choice = boardChoice()
-        if choice == 1:
-            size = 5
-            bombs = 3
-        if choice == 2:
-            size = 7
-            bombs = 17
-        if choice == 3:
-            size = 10
-            bombs = 36
-        bombBoard = makeBombBoard(choice)
-        print()
-        print("Generating board . . .")
-        time.sleep(1.5)
-        print()
-        clear_term()
-        print("MINESWEEPER CLI GAME\n")
-        playerBoard = seenBoard(choice)
-        showBoard(playerBoard)
-        moves = 0
-        while True:
-            print("Please pick which cell you wish to open")
-            x = int(input("X: "))
-            y = int(input("Y: "))
+    choice = boardChoice()
+    if choice == 1:
+        size = 5
+        bombs = 3
+    if choice == 2:
+        size = 7
+        bombs = 17
+    if choice == 3:
+        size = 10
+        bombs = 36
+    bombBoard = makeBombBoard(choice)
+    print()
+    print("Generating board . . .")
+    time.sleep(1.5)
+    print()
+    clear_term()
+    print("MINESWEEPER CLI GAME\n")
+
+    movesMade = []
+    playerBoard = seenBoard(choice)
+    showBoard(playerBoard)
+    moves = 0
+    while True:
+        print("Please pick which cell you wish to open")
+        x = int(input("X: "))
+        y = int(input("Y: "))
+        if [x,y] not in movesMade:
             time.sleep(0.5)
             clear_term()
             if bombBoard[y][x]=='X':
@@ -132,10 +133,15 @@ def minesweeper():
                 playerBoard[y][x] = bombBoard[y][x]
                 showBoard(playerBoard)
                 moves += 1
+                movesMade.append([x,y])
             if moves == (size*size-bombs):
                 print("You win! Congratulations!")
                 showBoard(bombBoard)
                 break
+        else:
+            clear_term()
+            print("Invalid move, already picked!")
+            showBoard(playerBoard)
 
 
 def main():
