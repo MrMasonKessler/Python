@@ -61,7 +61,7 @@ def makeBombBoard(choice):
                 if (x >= 0 and x <= size-2):
                     if array[y][x+1] != 'X':
                         array[y][x+1] += 1
-                        count += 1 
+                count += 1 
             else:
                 continue
     return array
