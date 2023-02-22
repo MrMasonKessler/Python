@@ -2,16 +2,6 @@ import random
 import os
 import time
 
-#DUPLICATE BOMBS ARE POSSIBLE, MUST FIX
-
-
-#How a typical grid looks, use for reference:
-# 0 1 2 3 4
-# 1
-# 2
-# 3
-# 4
-
 def boardChoice():
     clear_term()
     choice = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
