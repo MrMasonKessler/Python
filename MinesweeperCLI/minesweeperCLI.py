@@ -117,8 +117,18 @@ def minesweeper():
     moves = 0
     while True:
         print("Please pick which cell you wish to open")
-        x = int(input("X: "))
-        y = int(input("Y: "))
+        while True:
+            x = int(input("X: "))
+            if x >= size:
+                print("Invalid choice, please select somewhere on the board.")
+            else:
+                break
+        while True:
+            y = int(input("Y: "))
+            if y >= size:
+                print("Invalid choice, please select somewhere on the board.")
+            else:
+                break
         if [x,y] not in movesMade:
             time.sleep(0.5)
             clear_term()
