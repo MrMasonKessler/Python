@@ -7,13 +7,17 @@ def boardChoice():
     clear_term()
     choice = 0
     while True:
-        inp = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
-        if inp != 1 and inp != 2 and inp != 3:
+        inp = (input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
+        if inp.isdigit() == False:
+            clear_term()
+            print("Please enter an integer.")
+        elif int(inp) != 1 and int(inp) != 2 and int(inp) != 3:
+            clear_term()
             print("Invalid option: please select one of the choices.")
         else:
             break
     choice = inp
-    return choice
+    return int(choice)
 
 def makeBombBoard(choice):
     if choice == 1:
@@ -159,8 +163,7 @@ def minesweeper():
 
 def main():
     minesweeper()
-    #x = 1.5
-    #print(x.is_integer())
+
 
 if __name__ == "__main__":
     main()
