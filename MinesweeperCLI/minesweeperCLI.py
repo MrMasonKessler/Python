@@ -4,7 +4,14 @@ import time
 
 def boardChoice():
     clear_term()
-    choice = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
+    choice = 0
+    while True:
+        inp = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
+        if inp != 1 and inp != 2 and inp != 3:
+            print("Invalid option: please select one of the choices.")
+        else:
+            break
+    choice = inp
     return choice
 
 def makeBombBoard(choice):
