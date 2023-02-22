@@ -125,6 +125,7 @@ def minesweeper():
                 moves += 1
                 movesMade.append([x,y])
             if moves == (size*size-bombs):
+                clear_term()
                 print("You win! Congratulations!")
                 showBoard(bombBoard)
                 break
