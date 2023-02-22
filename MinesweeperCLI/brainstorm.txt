@@ -12,5 +12,5 @@ Make it so the revealed square shows the right number / bomb                    
     if there is a bomb shown, end the game and show the full board, saying they lose    DONE
 
 
-STILL NEED TO SOMEHOW ERROR CHECK AND LIMIT OPTIONS OF CHOICES
-ADDITIONALLY, IT SEEMS LIKE THE BOMB COUNTS AREN'T ALWAYS CORRECT, SO CHECK LOGIC
+STILL NEED TO SOMEHOW ERROR CHECK AND LIMIT OPTIONS OF CHOICES                          
+ADDITIONALLY, IT SEEMS LIKE THE BOMB COUNTS AREN'T ALWAYS CORRECT, SO CHECK LOGIC       DONE
