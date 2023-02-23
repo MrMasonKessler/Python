@@ -1,11 +1,23 @@
+from curses.ascii import isdigit
 import random
 import os
 import time
 
 def boardChoice():
     clear_term()
-    choice = int(input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
-    return choice
+    choice = 0
+    while True:
+        inp = (input("Please enter the what difficulty you would like to play on, 1 for easy, 2 for medium, 3 for hard: "))
+        if inp.isdigit() == False:
+            clear_term()
+            print("Please enter an integer.")
+        elif int(inp) != 1 and int(inp) != 2 and int(inp) != 3:
+            clear_term()
+            print("Invalid option: please select one of the choices.")
+        else:
+            break
+    choice = inp
+    return int(choice)
 
 def makeBombBoard(choice):
     if choice == 1:
@@ -110,8 +122,22 @@ def minesweeper():
     moves = 0
     while True:
         print("Please pick which cell you wish to open")
-        x = int(input("X: "))
-        y = int(input("Y: "))
+        while True:
+            x = (input("X: "))
+            if x.isdigit() == False:
+                print("Invalid choice, please select an integer.")
+            elif int(x) >= size:
+                print("Invalid choice, please select somewhere on the board.")
+            else:
+                break
+        while True:
+            y = (input("Y: "))
+            if y.isdigit() == False:
+                print("Invalid choice, please select an integer.")
+            elif int(y) >= size:
+                print("Invalid choice, please select somewhere on the board.")
+            else:
+                break
         if [x,y] not in movesMade:
             time.sleep(0.5)
             clear_term()
@@ -125,6 +151,7 @@ def minesweeper():
                 moves += 1
                 movesMade.append([x,y])
             if moves == (size*size-bombs):
+                clear_term()
                 print("You win! Congratulations!")
                 showBoard(bombBoard)
                 break
@@ -136,6 +163,7 @@ def minesweeper():
 
 def main():
     minesweeper()
+
 
 if __name__ == "__main__":
     main()
