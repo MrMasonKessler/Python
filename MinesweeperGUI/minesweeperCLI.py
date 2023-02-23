@@ -30,8 +30,8 @@ def makeBombBoard(choice):
         size = 10
         bombs = 25
     count = 0
-    array = [[0 for row in range(size)] for col in range(size)] #Makes the array used in generating the board
-    for bomb in range(bombs):
+    array = [[0 for _ in range(size)] for _ in range(size)] #Makes the array used in generating the board
+    for _ in range(bombs):
         while count < bombs:
             x = random.randint(0,size-1) #Picks an x variable in the board to be a bomb
             y = random.randint(0,size-1) #Picks a y variable in the board to be a bomb

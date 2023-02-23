@@ -6,6 +6,9 @@ root = Tk()
 root.title("Minesweeper GUI")
 WIDTH = 600
 HEIGHT = 600
+size = 4
+bombs = 3
+board = []
 root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
 
@@ -38,7 +41,7 @@ btn16 = StringVar()
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
 
 def play():
-    #I can probably make a button factory function, but I will do that after confirming that I can hard code it first.
+    #I can probably make a button factory function, but I will do that after confirming that I can hard code it first.)
 
     button1 = Button(root,height=2,width=1,relief='ridge',borderwidth=.5,textvariable=btn1,command=lambda:press(1,0,0))
     button1.grid(row=0,column=0)
@@ -89,51 +92,27 @@ def play():
     button16.grid(row=3,column=3)
 
     bombBoard = makeBombBoard()
-    print(bombBoard)
+    #print(bombBoard)
 
 def makeBombBoard():
-    size = 4
-    bombs = 3
+    #Make the field
+    global size,count,board
+    board = []
+    for x in range(0,size):
+        board.append([])
+        for y in range(0,size):
+            board[x].append(0)
 
-    array = [[0 for row in range(size)] for col in range(size)] #Makes the array used in generating the board
-    for bomb in range(bombs):
-        x = random.randint(0,size-1) #Picks an x variable in the board to be a bomb
-        y = random.randint(0,size-1) #Picks a y variable in the board to be a bomb
-        array[y][x] = 'X' #Sets that selected spot to be a bomb
+    #Distribute bombs
+    for bomb in range(0,bombs):
+        x = random.randint(0,size-1)
+        y = random.randint(0,size-1)
+        while board[x][y] == -1:
+            x = random.randint(0,size-1)
+            y = random.randint(0,size-1)            
+        board[x][y] == -1
 
-        #This next section makes it so that the spaces around the bomb are filled to be a 1, showing there is 1 bomb touching that spot
-
-        #Check bottom first:
-        if(y >= 0 and y <= size-2):
-            if array[y+1][x] != 'X':
-                array[y+1][x] += 1 # bottom center
-        if (x >=0 and x <= size-2) and (y >= 0 and y <= size-2):
-            if array[y+1][x+1] != 'X':
-                array[y+1][x+1] += 1 # bottom right
-        if (x >= 1 and x <= size-1) and (y >= 0 and y <= size-2):
-            if array[y+1][x-1] != 'X':
-                array[y+1][x-1] += 1 # bottom left
-
-        #Check top next:
-        if (x >= 0 and x <= size-1) and (y >= 1 and y <= size-1):
-            if array[y-1][x] != 'X':
-                array[y-1][x] += 1 # top center
-        if (x >= 0 and x <= size-2) and (y >= 1 and y <= size-1):
-            if array[y-1][x+1] != 'X':
-                array[y-1][x+1] += 1 # top right
-        if (x >= 1 and x <= size-1) and (y >= 1 and y <= size-1):
-            if array[y-1][x-1] != 'X':
-                array[y-1][x-1] += 1 # top left
-
-        #Check sides:
-        if (x >= 1 and x <= size-1):
-            if array[y][x-1] != 'X':
-                array[y][x-1] += 1
-        if (x >= 0 and x <= size-2):
-            if array[y][x+1] != 'X':
-                array[y][x+1] += 1
-    return array
-    #In print(makeBombBoard()), the return is something like [['X', 1, 1, 1], [1, 1, 1, 'X'], [0, 0, 2, 2], [0, 0, 1, 'X']]. This means that for tkinter, I ca check the row and column that the X would be in
+    return board
 
 def press(num,row,col):
     global count
@@ -195,5 +174,6 @@ def clear():
     btn15.set('')
     btn16.set('')
 
-play()
+print(makeBombBoard())
+#play()
 root.mainloop()
