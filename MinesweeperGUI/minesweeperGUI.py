@@ -10,41 +10,24 @@ import random
 
 root = Tk()
 root.title("Minesweeper GUI")
-WIDTH = 600
-HEIGHT = 600
+#WIDTH = 600
+#HEIGHT = 600
 size = 4
 bombs = 3
 board = []
 buttons = []
-root.geometry(f'{WIDTH}x{HEIGHT}')
+#root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
-
-
-btn1 = StringVar()
-btn2 = StringVar()
-btn3 = StringVar()
-btn4 = StringVar()
-btn5 = StringVar()
-btn6 = StringVar()
-btn7 = StringVar()
-btn8 = StringVar()
-btn9 = StringVar()
-btn10 = StringVar()
-btn11 = StringVar()
-btn12 = StringVar()
-btn13 = StringVar()
-btn14 = StringVar()
-btn15 = StringVar()
-btn16 = StringVar()
 
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
 
 def play():
-    pass
+    makePopup()
+    makeBombBoard()
 
 def makeBombBoard():
     #Make the field
-    global size,count,board
+    global size,bombs,board
     board = []
     for x in range(0,size):
         board.append([])
@@ -96,39 +79,37 @@ def makePopup():
         buttons.append([])
         for y in range(0,size):
             button = Button(root,text=" ", width=2,command=lambda x=x,y=y:press(x,y))
+            button.grid(row=x+1,column=y,sticky=N+S+W+E)
             buttons[x].append(button)
 
 
 def restartGame():
     pass
 
-def press(row,col):
+def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
     global size, board, buttons
     buttons[row][col]["text"]=str(board[row][col])
     if board[row][col] == 'X':
-        pass
+        buttons[row][col]["text"] = "*"
+        messagebox.showinfo("Game over, you lose!")
+        for x in range(0,size):
+            for y in range(0,size):
+                buttons[x][y]["text"] = "*"
     else:
         pass
+    checkWin()
+
+def checkWin():
+    global buttons,board,size
+    win = True
+    for x in range(0,size):
+        for y in range(0,size):
+            if board[x][y] != 'X' and buttons[x][y]["state"] == "normal":
+                win = False
+    if win:
+        messagebox.showinfo("Game over, you win!")
 
 
-def clear():
-    btn1.set('')
-    btn2.set('')
-    btn3.set('')
-    btn4.set('')
-    btn5.set('')
-    btn6.set('')
-    btn7.set('')
-    btn8.set('')
-    btn9.set('')
-    btn10.set('')
-    btn11.set('')
-    btn12.set('')
-    btn13.set('')
-    btn14.set('')
-    btn15.set('')
-    btn16.set('')
 
-print(makeBombBoard())
-#play()
+play()
 root.mainloop()
