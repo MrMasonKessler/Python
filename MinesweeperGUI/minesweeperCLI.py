@@ -139,14 +139,16 @@ def minesweeper():
             else:
                 break
         if [x,y] not in movesMade:
+            intx = int(x)
+            inty = int(y)
             time.sleep(0.5)
             clear_term()
-            if bombBoard[y][x]=='X':
+            if bombBoard[inty][intx]=='X':
                 print("You lose! Game over!")
                 showBoard(bombBoard)
                 break
             else:
-                playerBoard[y][x] = bombBoard[y][x]
+                playerBoard[inty][intx] = bombBoard[inty][intx]
                 showBoard(playerBoard)
                 moves += 1
                 movesMade.append([x,y])
