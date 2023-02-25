@@ -16,6 +16,7 @@ size = 4
 bombs = 3
 board = []
 buttons = []
+count = 0
 #root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
 
@@ -87,27 +88,33 @@ def restartGame():
     pass
 
 def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
-    global size, board, buttons
+    global size, board, buttons, count
     buttons[row][col]["text"]=str(board[row][col])
     if board[row][col] == 'X':
-        buttons[row][col]["text"] = "*"
-        messagebox.showinfo("Game over, you lose!")
+        buttons[row][col]["text"] = "X"
+        messagebox.showinfo(message="Game over, you lose!")
         for x in range(0,size):
             for y in range(0,size):
-                buttons[x][y]["text"] = "*"
+                buttons[x][y]["text"] = "X"
     else:
-        pass
+        count += 1
     checkWin()
 
+
+
 def checkWin():
-    global buttons,board,size
-    win = True
-    for x in range(0,size):
-        for y in range(0,size):
-            if board[x][y] != 'X' and buttons[x][y]["state"] == "normal":
-                win = False
-    if win:
-        messagebox.showinfo("Game over, you win!")
+    # global buttons,board,size,bombs,count
+    # win = True
+    # for x in range(0,size):
+    #     for y in range(0,size):
+    #         if board[x][y] != 'X' and buttons[x][y]["state"] == "normal":
+    #             win = False
+    # if win:
+    #     messagebox.showinfo(message="Game over, you win!")
+    global count,bombs,size
+    moves = (size * size) - bombs
+    if count == moves:
+        messagebox.showinfo(message="You win! Congrats!")
 
 
 
