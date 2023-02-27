@@ -66,9 +66,30 @@ def makeBombBoard():
                         board[y][x+1] += 1
     return board
 
+def easyMode():
+    global size, bombs
+    size = 4
+    bombs = 3
+    restartGame()
+
+def medMode():
+    global size, bombs
+    size = 6
+    bombs = 9
+    restartGame()
+
+def hardMode():
+    global size, bombs
+    size = 10
+    bombs = 36
+    restartGame()
+
 def makePopup():
     global size, buttons
     Button(root, text="Restart", command=restartGame).grid(row=0, column=0, columnspan=size, sticky=N+W+S+E)
+    Button(root,text="Easy",command=easyMode).grid(row=size+1,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Medium",command=medMode).grid(row=size+2,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Hard",command=hardMode).grid(row=size+3,column=0,columnspan=size,sticky=N+W+S+E)
     buttons = []
     for x in range(0,size):
         buttons.append([])
@@ -79,6 +100,10 @@ def makePopup():
 
 
 def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
+    #I looked up this destroy function for tkinter, where I can effectively stop everything that is currently running for tkinter
+    for x in root.winfo_children():
+        if type(x) != tkinter.Menu:
+            x.destroy()
     makePopup()
     makeBombBoard()
 
@@ -109,6 +134,10 @@ def checkWin():
 
 
 def play():
+    #Set a default size for when the game is launched, and it is able to be changed by hitting the difficulty buttons
+    global size, bombs
+    size = 4
+    bombs = 3
     makePopup()
     makeBombBoard()
 
