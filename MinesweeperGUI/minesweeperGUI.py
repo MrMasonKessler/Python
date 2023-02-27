@@ -18,6 +18,10 @@ count = 0
 movesMade = []
 root.resizable(True,True)
 
+
+#WHEN I RESTART, THE COUNT DOESN'T START INCREMENTING PER MOVE UNTIL YOU MAKE X MOVES, WHERE X IS THE NUMBER OF TIMES YOU'VE HIT THE RESET BUTTON
+
+
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
 
 def makeBombBoard():
@@ -99,17 +103,13 @@ def makePopup():
             buttons[x].append(button)
 
 def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
-    # #I looked up this destroy function for tkinter, where I can effectively stop everything that is currently running for tkinter
-    # global count
-    # count = 0
-    # for x in root.winfo_children():
-    #     if type(x) != tkinter.Menu:
-    #         x.destroy()
-    # makePopup()
-    # makeBombBoard()
-
-    #There is something wrong with what is written above, but I can't figure it out yet. Sometimes the bombs don't all distribute, or something happens to the count. 
-    pass
+    global root, count
+    for x in root.winfo_children():
+        x.destroy()
+    count = 0
+    makeBombBoard()
+    makePopup()
+    
 
 def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
     global size, board, buttons, count
