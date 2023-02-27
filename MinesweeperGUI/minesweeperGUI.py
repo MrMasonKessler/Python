@@ -3,29 +3,22 @@ While I have gotten practice from the TicTacToe tkinter project, there are some 
 A great help for me was Vakus on stack overflow, as they used button commands that I didn't know about. (Stuff like sticky, lambda, and using a button list instead of making
 the buttons manually.)
 '''
-
 from tkinter import *
 from tkinter import messagebox
 import random
+import tkinter
 
 root = Tk()
 root.title("Minesweeper GUI")
-#WIDTH = 600
-#HEIGHT = 600
 size = 6
 bombs = 6
 board = []
 buttons = []
 count = 0
 movesMade = []
-#root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
 
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
-
-def play():
-    makePopup()
-    makeBombBoard()
 
 def makeBombBoard():
     #Make the field
@@ -85,8 +78,9 @@ def makePopup():
             buttons[x].append(button)
 
 
-def restartGame():
-    pass
+def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
+    makePopup()
+    makeBombBoard()
 
 def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
     global size, board, buttons, count
@@ -103,27 +97,20 @@ def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
         else:
             movesMade.append([row,col])
         count += 1
-    
-    
     checkWin()
 
 
 
 def checkWin():
-    # global buttons,board,size,bombs,count
-    # win = True
-    # for x in range(0,size):
-    #     for y in range(0,size):
-    #         if board[x][y] != 'X' and buttons[x][y]["state"] == "normal":
-    #             win = False
-    # if win:
-    #     messagebox.showinfo(message="Game over, you win!")
     global count,bombs,size
     moves = (size * size) - bombs
     if count == moves:
         messagebox.showinfo(message="You win! Congrats!")
 
 
+def play():
+    makePopup()
+    makeBombBoard()
 
 play()
 root.mainloop()
