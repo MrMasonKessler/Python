@@ -98,14 +98,18 @@ def makePopup():
             button.grid(row=x+1,column=y,sticky=N+S+W+E)
             buttons[x].append(button)
 
-
 def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
-    #I looked up this destroy function for tkinter, where I can effectively stop everything that is currently running for tkinter
-    for x in root.winfo_children():
-        if type(x) != tkinter.Menu:
-            x.destroy()
-    makePopup()
-    makeBombBoard()
+    # #I looked up this destroy function for tkinter, where I can effectively stop everything that is currently running for tkinter
+    # global count
+    # count = 0
+    # for x in root.winfo_children():
+    #     if type(x) != tkinter.Menu:
+    #         x.destroy()
+    # makePopup()
+    # makeBombBoard()
+
+    #There is something wrong with what is written above, but I can't figure it out yet. Sometimes the bombs don't all distribute, or something happens to the count. 
+    pass
 
 def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
     global size, board, buttons, count
@@ -124,8 +128,6 @@ def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
         count += 1
     checkWin()
 
-
-
 def checkWin():
     global count,bombs,size
     moves = (size * size) - bombs
@@ -135,11 +137,12 @@ def checkWin():
 
 def play():
     #Set a default size for when the game is launched, and it is able to be changed by hitting the difficulty buttons
-    global size, bombs
+    global size, bombs, board
     size = 4
     bombs = 3
-    makePopup()
     makeBombBoard()
+    makePopup()
+
 
 play()
 root.mainloop()
