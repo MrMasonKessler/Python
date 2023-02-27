@@ -12,11 +12,12 @@ root = Tk()
 root.title("Minesweeper GUI")
 #WIDTH = 600
 #HEIGHT = 600
-size = 4
-bombs = 3
+size = 6
+bombs = 6
 board = []
 buttons = []
 count = 0
+movesMade = []
 #root.geometry(f'{WIDTH}x{HEIGHT}')
 root.resizable(True,True)
 
@@ -97,7 +98,13 @@ def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
             for y in range(0,size):
                 buttons[x][y]["text"] = "X"
     else:
+        if ([row,col]) in movesMade:
+            count -= 1
+        else:
+            movesMade.append([row,col])
         count += 1
+    
+    
     checkWin()
 
 
