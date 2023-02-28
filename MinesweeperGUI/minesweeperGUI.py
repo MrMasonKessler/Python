@@ -10,17 +10,13 @@ import tkinter
 
 root = Tk()
 root.title("Minesweeper GUI")
-size = 6
-bombs = 6
+size = 4
+bombs = 3
 board = []
 buttons = []
 count = 0
 movesMade = []
 root.resizable(True,True)
-
-
-#WHEN I RESTART, THE COUNT DOESN'T START INCREMENTING PER MOVE UNTIL YOU MAKE X MOVES, WHERE X IS THE NUMBER OF TIMES YOU'VE HIT THE RESET BUTTON
-
 
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
 
@@ -70,30 +66,31 @@ def makeBombBoard():
                         board[y][x+1] += 1
     return board
 
-def easyMode():
-    global size, bombs
-    size = 4
-    bombs = 3
-    restartGame()
-
 def medMode():
-    global size, bombs
+    global size, bombs, root
     size = 6
     bombs = 9
-    restartGame()
+    for x in root.winfo_children():
+        x.destroy()
+    makePopup()
+    makeBombBoard()
 
 def hardMode():
-    global size, bombs
+    global size, bombs, root
     size = 10
-    bombs = 36
-    restartGame()
+    bombs = 25
+    for x in root.winfo_children():
+        x.destroy()
+    makePopup()
+    makeBombBoard()
+    
 
 def makePopup():
     global size, buttons
     Button(root, text="Restart", command=restartGame).grid(row=0, column=0, columnspan=size, sticky=N+W+S+E)
-    Button(root,text="Easy",command=easyMode).grid(row=size+1,column=0,columnspan=size,sticky=N+W+S+E)
-    Button(root,text="Medium",command=medMode).grid(row=size+2,column=0,columnspan=size,sticky=N+W+S+E)
-    Button(root,text="Hard",command=hardMode).grid(row=size+3,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Easy", fg='limegreen', command=restartGame).grid(row=size+1,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Medium", fg='orange', command=medMode).grid(row=size+2,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Hard", fg='darkred', command=hardMode).grid(row=size+3,column=0,columnspan=size,sticky=N+W+S+E)
     buttons = []
     for x in range(0,size):
         buttons.append([])
@@ -103,17 +100,37 @@ def makePopup():
             buttons[x].append(button)
 
 def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
-    global root, count
+    global root, count, board, size, bombs, movesMade
     for x in root.winfo_children():
         x.destroy()
+    board = []
+    size = 4
+    bombs = 3
     count = 0
-    makeBombBoard()
+    movesMade = []
     makePopup()
+    makeBombBoard()
     
 
-def press(row,col): #STILL NEED TO FINISH THIS FUNCTION
+def press(row,col):
     global size, board, buttons, count
     buttons[row][col]["text"]=str(board[row][col])
+    if board[row][col]==1:
+        buttons[row][col]["fg"] ='dodgerblue'
+    if board[row][col]==2:
+        buttons[row][col]["fg"] ='forestgreen'
+    if board[row][col]==3:
+        buttons[row][col]["fg"] ='red'
+    if board[row][col]==4:
+        buttons[row][col]["fg"] ='purple3'
+    if board[row][col]==5:
+        buttons[row][col]["fg"] ='salmon2'
+    if board[row][col]==6:
+        buttons[row][col]["fg"] ='cyan'
+    if board[row][col]==7:
+        buttons[row][col]["fg"] ='darkorange'
+    if board[row][col]==8:
+        buttons[row][col]["fg"] ='gray'
     if board[row][col] == 'X':
         buttons[row][col]["text"] = "X"
         messagebox.showinfo(message="Game over, you lose!")
