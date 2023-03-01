@@ -17,11 +17,11 @@ buttons = []
 count = 0
 movesMade = []
 root.resizable(True,True)
-buttonState = True #Defaults by allowing normal presses
+buttonState = True #Defaults by allowing normal presses, if button state is false, then an F is placed on that spot as a flag
 
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
-#An idea for the flags: have a global variable, buttonState, that when it is true, pressing will be normal, but when it is false, it puts an F on the button text. 
-#This global variable state can be alternated between by pressing a button in a corner
+#Need to check place before flagging, if the spot is already in moves made, then you can't place a flag there
+
 
 def makeBombBoard():
     #Make the field
