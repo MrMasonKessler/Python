@@ -110,7 +110,7 @@ def makePopup():
             buttons[x].append(button)
 
 def restartGame(): #This function literally just remakes the bomb board and the popup. Will be used in a restart button available on screen.
-    global root, count, board, size, bombs, movesMade
+    global root, count, board, size, bombs, movesMade, buttonState
     for x in root.winfo_children():
         x.destroy()
     board = []
@@ -118,6 +118,7 @@ def restartGame(): #This function literally just remakes the bomb board and the 
     bombs = 3
     count = 0
     movesMade = []
+    buttonState = True
     makePopup()
     makeBombBoard()
     
@@ -167,9 +168,10 @@ def checkWin():
 
 def play():
     #Set a default size for when the game is launched, and it is able to be changed by hitting the difficulty buttons
-    global size, bombs, board
+    global size, bombs, board, buttonState
     size = 4
     bombs = 3
+    buttonState = True
     makeBombBoard()
     makePopup()
 
