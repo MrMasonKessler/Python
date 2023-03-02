@@ -16,7 +16,7 @@ board = []
 buttons = []
 count = 0
 movesMade = []
-colors = ['dodgerblue','forestgreen','red','purple3','salmon2','cyan','darkorange','gray']
+colors = ['dodgerblue','forestgreen','red','purple3','salmon2','cyan','darkorange','black']
 root.resizable(True,True)
 buttonState = True #Defaults by allowing normal presses, if button state is false, then an F is placed on that spot as a flag
 
@@ -124,7 +124,7 @@ def restartGame(): #This function literally just remakes the bomb board and the 
     
 
 def press(row,col):
-    global size, board, buttons, count, buttonState
+    global size, board, buttons, count, buttonState, colors
     if buttonState == True:
         buttons[row][col]["text"]=str(board[row][col])
         if board[row][col] == 'X':
@@ -133,8 +133,7 @@ def press(row,col):
             messagebox.showinfo(message="Game over, you lose!")
             for x in range(0,size):
                 for y in range(0,size):
-                    if board[x][y] == 'X':
-                        buttons[x][y]["text"] = "X"
+                    buttons[x][y]["text"] = str(board[x][y])
         else:
             if ([row,col]) in movesMade:
                 count -= 1
