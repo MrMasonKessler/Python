@@ -16,12 +16,12 @@ board = []
 buttons = []
 count = 0
 movesMade = []
+colors = ['dodgerblue','forestgreen','red','purple3','salmon2','cyan','darkorange','gray']
 root.resizable(True,True)
 buttonState = True #Defaults by allowing normal presses, if button state is false, then an F is placed on that spot as a flag
 
 #I can add pictures for the numbers and bombs if I want, and if I add flag functionality, I will have an image for that too.
 #Need to check place before flagging, if the spot is already in moves made, then you can't place a flag there
-
 
 def makeBombBoard():
     #Make the field
@@ -98,9 +98,9 @@ def makePopup():
     global size, buttons
     Button(root, text="Restart", command=restartGame).grid(row=0, column=0, columnspan=size, sticky=N+W+S+E)
     Button(root, text="Flag",command=toggleMode).grid(row=1, column=0, columnspan=size, sticky=N+W+S+E)
-    Button(root,text="Easy", fg='limegreen', command=restartGame).grid(row=size+1,column=0,columnspan=size,sticky=N+W+S+E)
-    Button(root,text="Medium", fg='orange', command=medMode).grid(row=size+2,column=0,columnspan=size,sticky=N+W+S+E)
-    Button(root,text="Hard", fg='darkred', command=hardMode).grid(row=size+3,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Easy", fg='limegreen', command=restartGame).grid(row=size+2,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Medium", fg='orange', command=medMode).grid(row=size+3,column=0,columnspan=size,sticky=N+W+S+E)
+    Button(root,text="Hard", fg='darkred', command=hardMode).grid(row=size+4,column=0,columnspan=size,sticky=N+W+S+E)
     buttons = []
     for x in range(0,size):
         buttons.append([])
@@ -127,43 +127,83 @@ def press(row,col):
     global size, board, buttons, count, buttonState
     if buttonState == True:
         buttons[row][col]["text"]=str(board[row][col])
-        if board[row][col]==1:
-            buttons[row][col]["fg"] ='dodgerblue'
-        if board[row][col]==2:
-            buttons[row][col]["fg"] ='forestgreen'
-        if board[row][col]==3:
-            buttons[row][col]["fg"] ='red'
-        if board[row][col]==4:
-            buttons[row][col]["fg"] ='purple3'
-        if board[row][col]==5:
-            buttons[row][col]["fg"] ='salmon2'
-        if board[row][col]==6:
-            buttons[row][col]["fg"] ='cyan'
-        if board[row][col]==7:
-            buttons[row][col]["fg"] ='darkorange'
-        if board[row][col]==8:
-            buttons[row][col]["fg"] ='gray'
         if board[row][col] == 'X':
             buttons[row][col]["text"] = "X"
+            buttons[row][col].config(background='red', disabledforeground='black')
             messagebox.showinfo(message="Game over, you lose!")
             for x in range(0,size):
                 for y in range(0,size):
-                    buttons[x][y]["text"] = "X"
+                    if board[x][y] == 'X':
+                        buttons[x][y]["text"] = "X"
         else:
             if ([row,col]) in movesMade:
                 count -= 1
             else:
                 movesMade.append([row,col])
+                buttons[row][col].config(disabledforeground=colors[board[row][col]])
             count += 1
+        if board[row][col] == 0:
+            buttons[row][col]["text"] = " "
+            autoFill(row,col)
+        buttons[row][col]["state"] = "disabled"
+        buttons[row][col].config(relief=SUNKEN)
         checkWin()
     if buttonState == False:
-        buttons[row][col]["text"]="F"
+        if buttons[row][col]["text"] == "F":
+            buttons[row][col]["text"] = " "
+        else:    
+            buttons[row][col]["text"] = "F"
+
+
+'''
+Note: I found this auto fill function on stack overflow for filling in Minesweeper 0s
+Made by Vakus
+'''
+def autoFill(x,y):
+    global board, buttons, colors, size, count
+    if buttons[x][y]["state"] == "disabled":
+        return
+    if board[x][y] != 0:
+        buttons[x][y]["text"] = str(board[x][y])
+        count += 1
+    else:
+        buttons[x][y]["text"] = " "
+    buttons[x][y].config(disabledforeground=colors[board[x][y]])
+    buttons[x][y].config(relief=tkinter.SUNKEN)
+    buttons[x][y]['state'] = 'disabled'
+    count += 1
+    if board[x][y] == 0:
+        if x != 0 and y != 0:
+            autoFill(x-1,y-1)
+        if x != 0:
+            autoFill(x-1,y)
+        if x != 0 and y != size-1:
+            autoFill(x-1,y+1)
+        if y != 0:
+            autoFill(x,y-1)
+        if y != size-1:
+            autoFill(x,y+1)
+        if x != size-1 and y != 0:
+            autoFill(x+1,y-1)
+        if x != size-1:
+            autoFill(x+1,y)
+        if x != size-1 and y != size-1:
+            autoFill(x+1,y+1)
 
 def checkWin():
-    global count,bombs,size
-    moves = (size * size) - bombs
-    if count == moves:
+    # global count,bombs,size
+    # moves = (size * size) - bombs
+    # if count == moves:
+    #     messagebox.showinfo(message="You win! Congrats!")
+    global buttons, board, size
+    done = True
+    for x in range(0, size):
+        for y in range(0,size):
+            if board[x][y] != 'X' and buttons[x][y]["state"] != "disabled":
+                done = False
+    if done:
         messagebox.showinfo(message="You win! Congrats!")
+
 
 
 def play():
