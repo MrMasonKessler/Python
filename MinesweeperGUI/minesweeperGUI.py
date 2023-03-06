@@ -113,14 +113,7 @@ def restartGame(): #This function literally just remakes the bomb board and the 
     global root, count, board, size, bombs, movesMade, buttonState
     for x in root.winfo_children():
         x.destroy()
-    board = []
-    size = 4
-    bombs = 3
-    count = 0
-    movesMade = []
-    buttonState = True
-    makePopup()
-    makeBombBoard()
+    play()
     
 
 def press(row,col):
@@ -190,10 +183,6 @@ def autoFill(x,y):
             autoFill(x+1,y+1)
 
 def checkWin():
-    # global count,bombs,size
-    # moves = (size * size) - bombs
-    # if count == moves:
-    #     messagebox.showinfo(message="You win! Congrats!")
     global buttons, board, size
     done = True
     for x in range(0, size):
@@ -207,10 +196,11 @@ def checkWin():
 
 def play():
     #Set a default size for when the game is launched, and it is able to be changed by hitting the difficulty buttons
-    global size, bombs, board, buttonState
+    global size, bombs, board, buttonState, movesMade
     size = 4
     bombs = 3
     buttonState = True
+    movesMade = []
     makeBombBoard()
     makePopup()
 
